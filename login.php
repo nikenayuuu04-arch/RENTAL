@@ -14,6 +14,7 @@
     $_SESSION['user_id'] = $d['user_id'];
     $_SESSION['username'] = $d['username'];
     $_SESSION['user_status'] = $d['user_status'];
+    $_SESSION['status'] = "login";
 
     if($d['user_status'] == 1){
         header("location:admin/index.php");

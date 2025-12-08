@@ -21,7 +21,7 @@
                     <th>Kendaraan</th>
                     <th>Tanggal Pinjam</th>
                     <th>Tanggal Kembali</th>
-                    <th>Harga / Hari</th>
+                    <th>Total Harga</th>
                     <th>Status</th>
                     <th width="20%">OPSI</th>
                 </tr>

@@ -36,13 +36,13 @@
 
     <table class="table">
         <tr>
-            <th width="25%">No. Invoice</th>
-            <th width="5%">:</th>
-            <td>INV-<?php echo $d['pinjam_id']; ?></td>
+            <th width="20%">No. Invoice</th>
+            <th>:</th>
+            <th>INV-PINJAM-<?php echo $d['pinjam_id']; ?></th>
         </tr>
 
         <tr>
-            <th>Peminjam</th>
+            <th>Nama Peminjam</th>
             <th>:</th>
             <td><?php echo $d['user_nama']; ?></td>
         </tr>
@@ -54,13 +54,13 @@
         </tr>
 
         <tr>
-            <th>Tgl Pinjam</th>
+            <th>Tanggal Pinjam</th>
             <th>:</th>
             <td><?php echo $d['tgl_pinjam']; ?></td>
         </tr>
 
         <tr>
-            <th>Tgl Kembali</th>
+            <th>Tanggal Kembali</th>
             <th>:</th>
             <td><?php echo $d['tgl_kembali']; ?></td>
         </tr>
@@ -68,7 +68,7 @@
         <tr>
             <th>Harga / Hari</th>
             <th>:</th>
-            <td><?php echo "Rp. " . number_format($d['kendaraan_harga_perhari']); ?></td>
+            <td><?php echo "Rp ".number_format($d['kendaraan_harga_perhari']); ?></td>
         </tr>
 
         <tr>
@@ -76,15 +76,34 @@
             <th>:</th>
             <td>
                 <?php
-                    if ($d['pinjam_status'] == 1) {
-                        echo "<span class='label label-success'>READY</span>";
-                    } elseif ($d['pinjam_status'] == 2) {
+                    if($d['pinjam_status'] == 2){
                         echo "<span class='label label-warning'>DIPINJAM</span>";
                     } else {
-                        echo "<span class='label label-primary'>SELESAI</span>";
+                        echo "<span class='label label-success'>SELESAI</span>";
                     }
                 ?>
             </td>
+        </tr>
+
+        <?php
+            $tgl1 = strtotime($d['tgl_pinjam']);
+            $tgl2 = strtotime($d['tgl_kembali']);
+            $selisih = ($tgl2 - $tgl1) / 86400;  
+            if($selisih == 0) $selisih = 1;
+
+            $total_bayar = $selisih * $d['kendaraan_harga_perhari'];
+        ?>
+
+        <tr>
+            <th>Total Hari</th>
+            <th>:</th>
+            <td><?php echo $selisih . " Hari"; ?></td>
+        </tr>
+
+        <tr>
+            <th>Total Biaya</th>
+            <th>:</th>
+            <th><?php echo "Rp ".number_format($total_bayar); ?></th>
         </tr>
     </table>
 
