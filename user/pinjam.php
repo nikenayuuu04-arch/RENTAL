@@ -45,7 +45,23 @@
 
                     <td><?php echo $d['tgl_pinjam']; ?></td>
                     <td><?php echo $d['tgl_kembali']; ?></td>
-                    <td><?php echo "Rp.".number_format($d['kendaraan_harga_perhari']); ?></td>
+                    <td>
+                        <?php
+                            $harga = $d['kendaraan_harga_perhari'];
+
+                            $start = strtotime($d['tgl_pinjam']);
+                            $end   = strtotime($d['tgl_kembali']);
+                            $selisih_hari = ($end - $start) / (60 * 60 * 24);
+
+                            if ($selisih_hari < 1) {
+                                $selisih_hari = 1;
+                            }
+
+                            $total = $harga * $selisih_hari;
+
+                            echo "Rp.".number_format($total);
+                        ?>
+                    </td>
 
                     <td>
                         <?php
@@ -59,7 +75,7 @@
 
                     <td>
                         <a href="pinjam_edit.php?id=<?php echo $d['pinjam_id']; ?>" class="btn btn-sm btn-info">Edit</a>
-                        <a href="pinjam_hapus.php?id=<?php echo $d['pinjam_id']; ?>" class="btn btn-sm btn-danger">Hapus</a>
+                        <a href="pinjam_batal.php?id=<?php echo $d['pinjam_id']; ?>" class="btn btn-sm btn-danger">Batalkan</a>
                     </td>
                 </tr>
 

@@ -16,6 +16,23 @@
             <div class="row">
 
                 <div class="col-md-3">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h1>
+                                <i class="glyphicon glyphicon-list"></i>
+                                <span class="pull-right">
+                                    <?php
+                                        $total = mysqli_query($koneksi,"SELECT * FROM kendaraan");
+                                        echo mysqli_num_rows($total);
+                                    ?>
+                                </span>
+                            </h1>
+                            Total Kendaraan
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
                     <div class="panel panel-success">
                         <div class="panel-heading">
                             <h1>
